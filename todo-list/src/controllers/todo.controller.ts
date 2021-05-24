@@ -61,7 +61,7 @@ export class TodoController {
 //here
 
   @get('/todos/count')
-  @response(200, {
+  @responses(200, {
     description: 'Todo model count',
     content: {'application/json': {schema: CountSchema}},
   })
