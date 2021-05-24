@@ -1,29 +1,25 @@
+import {inject} from '@loopback/core';
+import {Filter, repository} from '@loopback/repository';
 import {
-  Count,
-  CountSchema,
-  Filter,
-  FilterExcludingWhere,
-  repository,
-  Where,
-} from '@loopback/repository';
-import {
-  post,
-  param,
+  del,
   get,
   getModelSchemaRef,
+  HttpErrors,
+  param,
   patch,
+  post,
   put,
-  del,
   requestBody,
-  response,
 } from '@loopback/rest';
 import {Todo} from '../models';
 import {TodoRepository} from '../repositories';
+import {Geocoder} from '../services';
 
 export class TodoController {
   constructor(
     @repository(TodoRepository)
-    public todoRepository : TodoRepository,
+    public todoRepository: TodoRepository,
+    @inject('services.Geocoder') protected geoService: Geocoder,
   ) {}
 
   @post('/todos')
